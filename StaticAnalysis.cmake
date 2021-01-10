@@ -199,24 +199,17 @@ function(Cpplint directory files command)
     )
 endfunction()
 
-function(StaticAnalysis AnalyseFiles)
+function(StaticAnalysis AnalyseFiles dir)
 message(STATUS "Analyze ${AnalyseFiles}")
-Cpplint("${CMAKE_CURRENT_SOURCE_DIR}" "${AnalyseFiles}" cpplint)
-
-Cppcheck("${CMAKE_CURRENT_SOURCE_DIR}" "${AnalyseFiles}" cppcheck)
-
+Cpplint("${dir}" "${AnalyseFiles}" cpplint)
+Cppcheck("${dir}" "${AnalyseFiles}" cppcheck)
 #cccc("${CMAKE_CURRENT_SOURCE_DIR}" "${AnalyseFiles}" cccc)
-
-flint("${CMAKE_CURRENT_SOURCE_DIR}" "${AnalyseFiles}" flint++)
+flint("${dir}" "${AnalyseFiles}" flint++)
 
 message("Static analysis files ${AnalyseFiles}")
-flawfinder("${CMAKE_CURRENT_SOURCE_DIR}" "${AnalyseFiles}" flawfinder)
-
-
-cppclean("${CMAKE_CURRENT_SOURCE_DIR}" "${AnalyseFiles}" cppclean)
-
+flawfinder("${dir}" "${AnalyseFiles}" flawfinder)
+cppclean("${dir}" "${AnalyseFiles}" cppclean)
 #oclint("${CMAKE_CURRENT_SOURCE_DIR}" "${AnalyseFiles}" oclint)
-
-clangcheck("${CMAKE_CURRENT_SOURCE_DIR}" "${AnalyseFiles}" clang-check-9)
+clangcheck("${dir}" "${AnalyseFiles}" clang-check-9)
 endfunction()
 
